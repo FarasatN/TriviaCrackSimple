@@ -75,7 +75,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //System ui controller
+    implementation(libs.accompanist.systemuicontroller)
+
 //    implementation(libs.androidx.runtime.livedata)
+
+    //Splash Screen
+    implementation(libs.androidx.core.splashscreen)
 
     //Material Icons
     implementation(libs.androidx.material.icons.core)
@@ -105,24 +111,24 @@ dependencies {
     //Lifecycle
 //    val arch_version = "2.2.0"
     // ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+//    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // ViewModel utilities for Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 //    // LiveData
 //    implementation(libs.androidx.lifecycle.livedata.ktx)
     // Lifecycles only (without ViewModel or LiveData)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+//    implementation(libs.androidx.lifecycle.runtime.ktx)
     // Lifecycle utilities for Compose
     implementation(libs.androidx.lifecycle.runtime.compose)
     // Saved state module for ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+//    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
     // Annotation processor
-    ksp(libs.androidx.lifecycle.compiler)
+//    ksp(libs.androidx.lifecycle.compiler)
 
 //    // alternately - if using Java8, use the following instead of lifecycle-compiler
 //    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
-//    // optional - helpers for implementing LifecycleOwner in a Service
-//    implementation("androidx.lifecycle:lifecycle-service:$lifecycle_version")
+    // optional - helpers for implementing LifecycleOwner in a Service
+    implementation(libs.androidx.lifecycle.service)
 //    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
 //    implementation("androidx.lifecycle:lifecycle-process:$lifecycle_version")
 //    // optional - ReactiveStreams support for LiveData
@@ -136,9 +142,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
-//    //WorkManager
-//    // Kotlin + coroutines
-//    implementation(libs.androidx.work.runtime.ktx)
+    //WorkManager
+    // Kotlin + coroutines
+    implementation(libs.androidx.work.runtime.ktx)
 //    // optional - GCMNetworkManager support
 //    implementation(libs.androidx.work.gcm)
 //    // optional - Multiprocess support
