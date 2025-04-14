@@ -18,8 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.farasatnovruzov.triviacracksimple.ui.component.CategoryContent
+import com.farasatnovruzov.triviacracksimple.ui.screen.QuestionCategoryScreen
 import com.farasatnovruzov.triviacracksimple.ui.theme.TriviaCrackSimpleTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,31 +33,26 @@ class MainActivity : ComponentActivity() {
         setContent {
             TriviaCrackSimpleTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    QuestionCategoryScreen(
+                        navController = rememberNavController(),
                         modifier = Modifier.padding(innerPadding)
                     )
-                    Spacer(modifier = Modifier.fillMaxWidth())
-                    Divider(Modifier.height(10.dp))
-                    Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(innerPadding), content = { Text(text = "Test") })
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     TriviaCrackSimpleTheme {
-        Greeting("Android")
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            QuestionCategoryScreen(
+                navController = rememberNavController(),
+                modifier = Modifier.padding(innerPadding)
+            )
+        }
     }
 }
