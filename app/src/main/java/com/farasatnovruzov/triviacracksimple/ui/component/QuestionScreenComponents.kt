@@ -10,9 +10,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonColors
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -137,7 +142,53 @@ fun DrawDottedLine() {
             strokeWidth = 10f
         )
     }
+}
 
+
+@Composable
+fun QuestionChoicesLayout(
+    questionChoicesState: MutableList<String>,
+    userAnswerState: MutableState<Int?>,
+    answerAction: (Int) -> Unit,
+    isNextButtonPassive: MutableState<Boolean>,
+    correctAnswerState: MutableState<Boolean>,
+){
+    questionChoicesState.forEachIndexed { index, s ->
+        Row(
+            modifier = Modifier
+                .padding(vertical = 5.dp, horizontal = 10.dp)
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .height(45.dp)
+                .border(width = 2.dp, color = Color.Blue, shape = RoundedCornerShape(15.dp))
+                .clip(RoundedCornerShape(50))
+                .background(Color.Transparent),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ){
+            RadioButton(
+                selected = (userAnswerState.value == index),
+                onClick = {
+                    answerAction.invoke(index)
+                    isNextButtonPassive.value = false
+                    correctAnswerState.value = userAnswerState.value == index
+                },
+                enabled = !isNextButtonPassive.value,
+                modifier = Modifier.padding(start = 15.dp),
+                colors = RadioButtonDefaults.colors(
+                    disabledSelectedColor = if(correctAnswerState.value == true && userAnswerState.value == index){
+                      Color.Green.copy(alpha = 0.2f)
+                    }else{
+                        Color.Red.copy(alpha = 0.2f)
+                    },
+                    disabledUnselectedColor = Color.Blue,
+                    selectedColor = Color.Green,
+                    unselectedColor = Color.Red
+                )
+            )
+        }
+
+    }
 }
 
 
