@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.farasatnovruzov.triviacracksimple.ui.navigation.NavigationScreens
 import com.farasatnovruzov.triviacracksimple.ui.screen.QuestionCategoryScreen
 import com.farasatnovruzov.triviacracksimple.ui.viewmodel.QuestionCategories
 
@@ -81,7 +82,7 @@ fun CategoryItem(
             .border(1.dp, Color.Transparent,RoundedCornerShape(24.dp)),
         shape = RoundedCornerShape(24.dp),
         onClick = {
-//            navController.navigate(route = "question_screen/${category.first.name}")
+            navController.navigate(route = "${NavigationScreens.SCREEN_QUESTION.name}/${category.first.name}")
         }
     ) {
         Column(
