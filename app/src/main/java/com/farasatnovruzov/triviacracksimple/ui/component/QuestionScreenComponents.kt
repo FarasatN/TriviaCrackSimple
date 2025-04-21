@@ -13,11 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -147,12 +147,12 @@ fun DrawDottedLine() {
 
 @Composable
 fun QuestionChoicesLayout(
-    questionChoicesState: MutableList<String>,
+    questionChoicesState: List<String>,
     userAnswerState: MutableState<Int?>,
     answerAction: (Int) -> Unit,
     isNextButtonPassive: MutableState<Boolean>,
     correctAnswerState: MutableState<Boolean>,
-){
+) {
     questionChoicesState.forEachIndexed { index, s ->
         Row(
             modifier = Modifier
@@ -165,7 +165,7 @@ fun QuestionChoicesLayout(
                 .background(Color.Transparent),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
-        ){
+        ) {
             RadioButton(
                 selected = (userAnswerState.value == index),
                 onClick = {
@@ -176,9 +176,9 @@ fun QuestionChoicesLayout(
                 enabled = !isNextButtonPassive.value,
                 modifier = Modifier.padding(start = 15.dp),
                 colors = RadioButtonDefaults.colors(
-                    disabledSelectedColor = if(correctAnswerState.value == true && userAnswerState.value == index){
-                      Color.Green.copy(alpha = 0.2f)
-                    }else{
+                    disabledSelectedColor = if (correctAnswerState.value == true && userAnswerState.value == index) {
+                        Color.Green.copy(alpha = 0.2f)
+                    } else {
                         Color.Red.copy(alpha = 0.2f)
                     },
                     disabledUnselectedColor = Color.Blue,
@@ -186,6 +186,25 @@ fun QuestionChoicesLayout(
                     unselectedColor = Color.Red
                 )
             )
+
+            val annotadedString = buildAnnotatedString {
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.Medium,
+                        color = if (correctAnswerState.value == true && index == userAnswerState.value) {
+                            Color.Green
+                        } else if(correctAnswerState.value == false && index == userAnswerState.value){
+                            Color.Red
+                        }else{
+                            Color.Gray
+                        },
+                        fontSize = 16.sp
+                    )
+                ){
+                    append(s)
+                }
+            }
+            Text(annotadedString)
         }
 
     }
@@ -198,4 +217,17 @@ private fun Preview() {
 //    ScoreBar(correctAnswerCount = 10, wrongAnswerCount = 20)
 //    QuestionTrackerBar(counter = 10, outOf = 20)
     DrawDottedLine()
+    QuestionChoicesLayout(
+        questionChoicesState = remember {
+            mutableListOf(
+                "Option 1",
+                "Option 2",
+                "Option 3",
+            )
+        },
+        userAnswerState = remember { mutableStateOf(null) },
+        answerAction = {},
+        isNextButtonPassive = remember { mutableStateOf(false) },
+        correctAnswerState = remember { mutableStateOf(false) }
+    )
 }
