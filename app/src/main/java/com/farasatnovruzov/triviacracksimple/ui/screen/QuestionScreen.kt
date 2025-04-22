@@ -187,7 +187,6 @@ fun QuestionLayout(
                         tint = Color.White
                     )
                 }
-
             }
         }
     }

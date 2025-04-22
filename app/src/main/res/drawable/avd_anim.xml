@@ -4,8 +4,8 @@
     <aapt:attr name="android:drawable">
         <vector
             android:name="morphinganimals"
-            android:width="409dp"
-            android:height="280dp"
+            android:width="77dp"
+            android:height="77dp"
             android:viewportWidth="409"
             android:viewportHeight="280">
             <path
