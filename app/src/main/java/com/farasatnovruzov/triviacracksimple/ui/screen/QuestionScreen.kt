@@ -173,7 +173,7 @@ fun QuestionLayout(
                     onClick = {
                         onNextClicked.invoke(questionIndex.intValue)
 //                        userAnswerState.value = null
-                        isNextButtonPassive.value = false
+//                        isNextButtonPassive.value = false
                     },
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)

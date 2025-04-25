@@ -157,7 +157,7 @@ fun QuestionChoicesLayout(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .height(45.dp)
-                .border(width = 2.dp, color = Color.Blue, shape = RoundedCornerShape(15.dp))
+                .border(width = 2.dp, color = Color.Cyan, shape = RoundedCornerShape(15.dp))
                 .clip(RoundedCornerShape(50))
                 .background(Color.Transparent),
             verticalAlignment = Alignment.CenterVertically,
@@ -167,31 +167,29 @@ fun QuestionChoicesLayout(
                 selected = (userAnswerState.value == index),
                 onClick = {
                     answerAction.invoke(index)
-//                    isNextButtonPassive.value = false
-                    isNextButtonPassive.value = true
+                    isNextButtonPassive.value = false
                     correctAnswerState.value = userAnswerState.value == index
                 },
                 enabled = !isNextButtonPassive.value,
                 modifier = Modifier.padding(start = 15.dp),
                 colors = RadioButtonDefaults.colors(
-                    disabledSelectedColor = if (correctAnswerState.value == true && userAnswerState.value == index) {
+                    disabledSelectedColor = if (correctAnswerState.value && userAnswerState.value == index) {
                         Color.Green.copy(alpha = 0.2f)
                     } else {
                         Color.Red.copy(alpha = 0.2f)
                     },
-                    disabledUnselectedColor = Color.Blue,
+                    disabledUnselectedColor = Color.Cyan,
                     selectedColor = Color.Green,
                     unselectedColor = Color.Red
                 )
             )
-
             val annotadedString = buildAnnotatedString {
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Medium,
-                        color = if (correctAnswerState.value == true && index == userAnswerState.value) {
+                        color = if (correctAnswerState.value && index == userAnswerState.value) {
                             Color.Green
-                        } else if(correctAnswerState.value == false && index == userAnswerState.value){
+                        } else if(!correctAnswerState.value && index == userAnswerState.value){
                             Color.Red
                         }else{
                             Color.Gray
