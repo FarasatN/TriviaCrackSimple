@@ -179,7 +179,7 @@ fun QuestionLayout(
                         .align(Alignment.CenterHorizontally)
                         .border(2.dp,Color.Red, RoundedCornerShape(30.dp))
                         .clip(RoundedCornerShape(30.dp))
-                        .background(Color.Cyan),
+                        .background(Color.Green),
                     enabled = isNextButtonPassive.value
                 ) {
                     Icon(
