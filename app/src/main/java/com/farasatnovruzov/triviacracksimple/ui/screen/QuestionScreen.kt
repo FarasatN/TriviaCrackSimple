@@ -46,7 +46,10 @@ fun QuestionScreen(
     selectedCategory: String,
     questionViewModel: QuestionViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(key1 = selectedCategory) {
+    LaunchedEffect(
+//        key1 = selectedCategory
+        key1 = true
+    ) {
         questionViewModel.getAllQuestions(selectedCategory)
     }
     val state = questionViewModel.questionState.value
@@ -117,7 +120,7 @@ fun QuestionLayout(
             userAnswerState.value = it
             correctAnswerState.value = questionChoicesState[it] == question?.answer
 
-            if (correctAnswerState.value == true) {
+            if (correctAnswerState.value) {
                 userCorrectAnswerCountState.intValue +=1
             }else{
                 userWrongAnswerCountState.intValue +=1
@@ -170,7 +173,7 @@ fun QuestionLayout(
                     onClick = {
                         onNextClicked.invoke(questionIndex.intValue)
 //                        userAnswerState.value = null
-//                        isNextButtonPassive.value = true
+                        isNextButtonPassive.value = false
                     },
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
@@ -187,9 +190,7 @@ fun QuestionLayout(
                         tint = Color.White
                     )
                 }
-
             }
         }
     }
-
 }

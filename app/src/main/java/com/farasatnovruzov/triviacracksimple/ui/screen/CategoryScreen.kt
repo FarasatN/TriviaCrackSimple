@@ -34,7 +34,5 @@ fun QuestionCategoryScreen(
                 navController
             )
         }
-
     }
-
 }

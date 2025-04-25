@@ -86,12 +86,11 @@ fun ScoreBar(
 
             ) {
                 Text(
-                    "$correctScore", style = TextStyle(
+                    "$wrongScore", style = TextStyle(
                         fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.Black
                     )
                 )
             }
-
         }
     }
 }
@@ -120,9 +119,7 @@ fun QuestionTrackerBar(
                 }
             }
         }
-
     })
-
 }
 
 @Composable
@@ -170,7 +167,8 @@ fun QuestionChoicesLayout(
                 selected = (userAnswerState.value == index),
                 onClick = {
                     answerAction.invoke(index)
-                    isNextButtonPassive.value = false
+//                    isNextButtonPassive.value = false
+                    isNextButtonPassive.value = true
                     correctAnswerState.value = userAnswerState.value == index
                 },
                 enabled = !isNextButtonPassive.value,
@@ -206,28 +204,6 @@ fun QuestionChoicesLayout(
             }
             Text(annotadedString)
         }
-
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-//    ScoreBar(correctAnswerCount = 10, wrongAnswerCount = 20)
-//    QuestionTrackerBar(counter = 10, outOf = 20)
-    DrawDottedLine()
-    QuestionChoicesLayout(
-        questionChoicesState = remember {
-            mutableListOf(
-                "Option 1",
-                "Option 2",
-                "Option 3",
-            )
-        },
-        userAnswerState = remember { mutableStateOf(null) },
-        answerAction = {},
-        isNextButtonPassive = remember { mutableStateOf(false) },
-        correctAnswerState = remember { mutableStateOf(false) }
-    )
-}
